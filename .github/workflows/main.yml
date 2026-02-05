@@ -8,14 +8,12 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Instalar Ngrok (Garantido)
+    - name: Instalar Ngrok
       run: |
-        # Usamos o Chocolatey para evitar erros de link 404/402
         choco install ngrok -y
 
     - name: Auth Ngrok
       run: |
-        # Com choco, o ngrok fica no PATH do sistema, não precisa de .\
         ngrok config add-authtoken 39GjIAFCVSrHfZte4mYiSsVhCKD_5GTFAWDz8W6WxyiFcgeVE
 
     - name: Create User
@@ -31,8 +29,8 @@ jobs:
 
     - name: Start Tunnel
       run: |
-        # O comando que você pediu, rodando de forma estável
-        ngrok tcp 3389 --log=stdout --log-level=info --console-ui=false
+        # Comando corrigido para v3: --log=stdout já desativa a UI automaticamente
+        ngrok tcp 3389 --log stdout
 
     - name: Keep Alive
       run: |
